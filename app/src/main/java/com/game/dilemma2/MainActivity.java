@@ -26,7 +26,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.Toast;import android.graphics.Matrix;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity{
     final VideoView[] videoView = new VideoView[6];
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity{
                                         if (img_alpha < 0){
                                             img_fade_thd = false;
                                             third_related_anim_flag = false;
-                                            middleImg.setVisibility(View.INVISIBLE);
+//                                            middleImg.setVisibility(View.INVISIBLE);
                                             spinnerGestureOn = true;
                                             gestureOn = true;
                                             circle_gesture();
@@ -192,7 +193,6 @@ public class MainActivity extends AppCompatActivity{
     float leftPersonX = 100;
     float rightPersonX = 1550;
     boolean isDragging = false;
-    final int touchRange = 40;
     final int distanceFromOrigin = 250;
     final int nCircle = 20;
     boolean lastVidVisit = true;
@@ -229,6 +229,8 @@ public class MainActivity extends AppCompatActivity{
         Log.d("Prev",Float.toString(iPrevTouchedCircle));
         Log.d("Curr",Float.toString(iTouchedCircle));
     }
+    float shortchim_angle = 0;
+    float longchim_angle = 0;
     boolean isGestureCW(){
         if(iPrevTouchedCircle == iTouchedCircle){
             return false;
@@ -237,8 +239,16 @@ public class MainActivity extends AppCompatActivity{
             if((iPrevTouchedCircle >= nCircle - 3)
                && (iTouchedCircle >= 0 && iTouchedCircle < 3
                || iTouchedCircle > iPrevTouchedCircle)){
+                shortchim_angle += 1;
+                longchim_angle += 2.2;
+                shortchim.setRotation(shortchim_angle);
+                longchim.setRotation(longchim_angle);
                 return true;
             } else if(iTouchedCircle > iPrevTouchedCircle) {
+                shortchim_angle += 1;
+                longchim_angle += 2.2;
+                shortchim.setRotation(shortchim_angle);
+                longchim.setRotation(longchim_angle);
                 return true;
             }
         }
@@ -252,8 +262,16 @@ public class MainActivity extends AppCompatActivity{
             if(iPrevTouchedCircle < 3
                && (iTouchedCircle > nCircle - 2
                || iTouchedCircle < iPrevTouchedCircle)){
+                shortchim_angle -= 1;
+                longchim_angle -= 2.2;
+                shortchim.setRotation(shortchim_angle);
+                longchim.setRotation(longchim_angle);
                 return true;
             } else if(iTouchedCircle < iPrevTouchedCircle) {
+                shortchim_angle -= 1;
+                longchim_angle -= 2.2;
+                shortchim.setRotation(shortchim_angle);
+                longchim.setRotation(longchim_angle);
                 return true;
             }
         }
@@ -318,16 +336,17 @@ public class MainActivity extends AppCompatActivity{
                                 @Override
                                 public void run() {
                                     if (sfvisit) {
-                                        Display display = getWindowManager().getDefaultDisplay();
-                                        Point size = new Point();
-                                        display.getSize(size);
-                                        int originX = size.x / 2;
-                                        int originY = size.y / 2;
-                                        defineCirclePoints(originX, originY);
-                                        sfvisit = false;
+                                        //legacy define scope
+                                        longchim_angle = 0;
+                                        shortchim_angle = 0;
+                                        shortchim.setRotation(shortchim_angle);
+                                        longchim.setRotation(longchim_angle);
                                     }
                                     if(characterMovementOn){
                                         moveCharacters();
+                                        shortchim.setVisibility(View.VISIBLE);
+                                        longchim.setVisibility(View.VISIBLE);
+                                        clock.setVisibility(View.VISIBLE);
                                     }
                                     if(spinnerGestureOn){
                                         spinnerEnd();
@@ -366,6 +385,7 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
                 videoView[3].setVisibility(View.VISIBLE);
+
                 videoView[2].setVisibility(View.INVISIBLE);
                 lastVidVisit = false;
             }
@@ -375,6 +395,13 @@ public class MainActivity extends AppCompatActivity{
             }
             if(cntVidTime > 500){
                 if(visvid) {
+                    shortchim.setVisibility(View.VISIBLE);
+                    longchim.setVisibility(View.VISIBLE);
+                    clock.setVisibility(View.VISIBLE);
+                    longchim_angle = 0;
+                    shortchim_angle = 0;
+                    longchim.setRotation(0);
+                    shortchim.setRotation(0);
                     characterVisibilityOn = true;
                     visvid = false;
                 }
@@ -412,9 +439,37 @@ public class MainActivity extends AppCompatActivity{
         rightPerson.setX(1550);
         leftPerson.setX(100);
 
+        longchim = findViewById(R.id.longchim);
+        shortchim = findViewById(R.id.shortchim);
+        clock = findViewById(R.id.clock);
         img.setVisibility(View.VISIBLE);
         img.setImageAlpha(0);
+
+//        Matrix matrix = new Matrix();
+//        longchim.setScaleType(ImageView.ScaleType.MATRIX);   //required
+//        matrix.postRotate((float) 23, 0, 0);
+//        longchim.setImageMatrix(matrix);
+//
+//        Matrix matrix2 = new Matrix();
+//        shortchim.setScaleType(ImageView.ScaleType.MATRIX);   //required
+//        matrix2.postRotate((float) 23, 0, 0);
+//        shortchim.setImageMatrix(matrix);
+//
+//        Matrix matrix3 = new Matrix();
+//        clock.setScaleType(ImageView.ScaleType.MATRIX);   //required
+//        matrix3.postRotate((float) 0, 0, 0);
+//        clock.setImageMatrix(matrix);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int originX = size.x / 2;
+        int originY = size.y / 2;
+        defineCirclePoints(originX, originY);
+        sfvisit = false;
+
         globalThread();
+
+
 
         videoView[0] = (VideoView) findViewById(R.id.chatBox);
         Uri uri = Uri.parse("android.resource://com.game.dilemma2/raw/chatbox");
@@ -439,6 +494,7 @@ public class MainActivity extends AppCompatActivity{
         videoView[5] = (VideoView) findViewById(R.id.ending);
         Uri uri12 = Uri.parse("android.resource://com.game.dilemma2/raw/ending");
         videoView[5].setVideoURI(uri12);
+
 
         for(int i = 0; i < 5; i++){
             videoView[i].setVisibility(View.INVISIBLE);
@@ -542,6 +598,7 @@ public class MainActivity extends AppCompatActivity{
                                 toast = Toast.makeText(getApplicationContext(), "오답이예요!", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
                                 toast.show();
+                                break;
                             }
                         }
                     }
