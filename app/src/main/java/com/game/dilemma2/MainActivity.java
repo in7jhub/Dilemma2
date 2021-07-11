@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity{
                                         if (img_alpha < 0){
                                             img_fade_thd = false;
                                             third_related_anim_flag = false;
-//                                            middleImg.setVisibility(View.INVISIBLE);
+                                            middleImg.setVisibility(View.INVISIBLE);
                                             spinnerGestureOn = true;
                                             gestureOn = true;
                                             circle_gesture();
@@ -292,7 +292,6 @@ public class MainActivity extends AppCompatActivity{
             } else {
                 if(vidVisit){
                     alphaer = true;
-                    img.setImageAlpha(0);
                     videoView[4].setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
