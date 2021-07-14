@@ -571,10 +571,11 @@ public class MainActivity extends AppCompatActivity{
             Log.d("app_kill_cnt",Long.toString(app_kill_cnt));
             app_kill_cnt++;
         }
-        if(app_kill_cnt > 500){
+        if(app_kill_cnt > 400){
+            stopLockTask();
             finish();
         } else if (app_kill_cnt > 200){
-            app_kill_cnt_text.setText("직원용 히든키 \n500에 종료 : "+Long.toString(app_kill_cnt));
+            app_kill_cnt_text.setText("직원용 히든키 \n400에 종료됨 : "+Long.toString(app_kill_cnt));
         }
 //            setTouchedCircle(curX, curY);
 //                Log.d("curx",Float.toString(curX));
@@ -763,7 +764,7 @@ public class MainActivity extends AppCompatActivity{
         run_udp_thd();
         globalThread();
 
-
+        this.startLockTask();
     }
 }
 

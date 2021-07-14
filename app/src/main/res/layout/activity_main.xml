@@ -240,9 +240,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="100dp"
-        android:alpha=".2"
+        android:alpha=".4"
         android:textSize="30sp"
-        android:textColor="@color/purple_200">
+        android:textColor="@color/purple_700">
 
     </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
