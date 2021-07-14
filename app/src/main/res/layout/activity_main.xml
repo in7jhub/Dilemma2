@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    >
+
     <View
-        android:id="@+id/backgroundBlack"
+        android:id="@+id/bg_black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black">
@@ -22,19 +22,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         ></VideoView>
-    <Button
-        android:id="@+id/firstPass"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:visibility="visible"
-        ></Button>
+<!--    <Button-->
+<!--        android:id="@+id/firstPass"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:alpha="0"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:visibility="invisible"-->
+<!--        ></Button>-->
+
     <VideoView
         android:id="@+id/fourthVid"
         android:layout_width="match_parent"
@@ -45,6 +46,7 @@
         android:layout_marginEnd="0dp"
         android:visibility="invisible"
         ></VideoView>
+
     <VideoView
         android:id="@+id/willing"
         android:layout_width="match_parent"
@@ -55,6 +57,16 @@
         android:layout_marginEnd="0dp"
         android:visibility="invisible"
         ></VideoView>
+    <ImageView
+        android:id="@+id/middle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/middle"
+        android:visibility="invisible"
+        android:scaleType="fitXY"></ImageView>
+
     <Button
         android:id="@+id/scndPass"
         android:layout_width="1000dp"
@@ -67,15 +79,8 @@
         android:visibility="invisible"
         ></Button>
 
-    <ImageView
-        android:id="@+id/middle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:src="@drawable/middle"
-        android:visibility="invisible"
-        android:scaleType="fitXY"></ImageView>
+
+
     <Button
         android:id="@+id/thirdPass"
         android:layout_width="match_parent"
@@ -83,7 +88,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:alpha="0"
-        android:visibility="visible"></Button>
+        android:visibility="invisible"></Button>
     <ImageView
         android:id="@+id/char_bg"
         android:layout_width="match_parent"
@@ -93,12 +98,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginStart="0dp"></ImageView>
 
-    <View
-        android:id="@+id/gestureArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0">
-    </View>
+
 
     <VideoView
         android:id="@+id/spinnerend"
@@ -210,4 +210,39 @@
         android:background="@null"
         android:imeOptions="actionDone"
         android:visibility="invisible" />
+    <ImageView
+        android:id="@+id/gestureArea"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:alpha="0"
+        android:background="@color/purple_200"
+        android:visibility="visible">
+    </ImageView>
+<!--    <View-->
+<!--        android:id="@+id/dummy"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:alpha="100"-->
+<!--        android:background="@color/purple_200"-->
+<!--        android:visibility="visible">-->
+<!--    </View>-->
+    <TextView
+        android:id="@+id/appkill"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"
+        android:alpha=".2"
+        android:textSize="30sp"
+        android:textColor="@color/purple_200">
+
+    </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>
